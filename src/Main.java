@@ -8,54 +8,91 @@ public class Main {
         Locale.setDefault(Locale.US);
         Scanner sc = new Scanner(System.in);
 
-        double posicaoTremA = 0, posicaoTremB = 10000, velocidadeTremA, velocidadeTremB;
-        int opt, qtdTremA, qtdTremB;
+        double posicaoInicial = 0, posicaoFinal = 10000, posicaoTremA, posicaoTremB, velocidadeTremA, velocidadeTremB;
+        int opt;
 
         while (true) {
             try {
-                System.out.println("1-Jogar\n2-Encerrar");
+                System.out.println("1-Jogar\n2-Sair");
                 opt = Integer.parseInt(sc.nextLine());
 
                 if (opt == 1) {
+                    while (true) {
+                        try {
+                            System.out.println("Digite a posição inicial do trem A: ");
+                            posicaoTremA = sc.nextDouble();
 
+                            if (posicaoTremA < posicaoInicial || posicaoTremA >= posicaoFinal) {
+                                System.out.println("Posição Inválida Inicial do Trem A!");
+                                continue;
+                            }
+                            break;
+
+                        } catch (InputMismatchException e) {
+                            System.out.println("Valor Inválido!");
+                            sc.next();
+                        }
+                    }
+
+                    while (true) {
                         try {
                             System.out.println("Digite quantos KM o trem A deseja andar: ");
                             velocidadeTremA = sc.nextDouble();
 
                             if (velocidadeTremA > 300 || velocidadeTremA <= 0) {
                                 System.out.println("Digite um valor maior que 0 e menor que 300");
-                            } else {
-                                posicaoTremA += velocidadeTremA;
-                                System.out.println("KM atual do trem A: " + posicaoTremA);
+                                continue;
                             }
+                            posicaoTremA += velocidadeTremA;
+                            System.out.println("KM atual do trem A: " + posicaoTremA);
+                            break;
+
+
                         } catch (InputMismatchException e) {
                             System.out.println("Você digitou um caractere Inválido!");
                         }
-
-
-                    try {
-                        System.out.println("Digite quantos KM o trem B deseja andar: ");
-                        velocidadeTremB = sc.nextDouble();
-
-                        if (velocidadeTremB < -300 || velocidadeTremB >= 0) {
-                            System.out.println("Digite um valor menor que 0 e até -300!");
-
-                        }
-                        else {
-
-                            posicaoTremB += velocidadeTremB;
-                            System.out.println("KM DO trem B " + posicaoTremB);
-                            break;
-                        }
-                        break;
-
-                    } catch (InputMismatchException e) {
-                        System.out.println("Você digitou um caractere Inválido!");
                     }
 
-                }
-                if (opt == 2) {
+                    while (true) {
+                        try {
+                            System.out.println("\nDigite a posição inicial do Trem B: ");
+                            posicaoTremB = sc.nextDouble();
 
+                            if (posicaoTremB <= posicaoInicial || posicaoTremB > posicaoFinal) {
+                                System.out.println("Posição Inválida Inicial do Trem B");
+                                continue;
+                            }
+                            break;
+                        } catch (InputMismatchException e) {
+                            System.out.println("Valor Inválido!");
+                            sc.next();
+                        }
+                    }
+
+                    while (true) {
+                        try {
+                            System.out.println("Digite quantos KM o trem B deseja andar: ");
+                            velocidadeTremB = sc.nextDouble();
+
+                            if (velocidadeTremB < -300 || velocidadeTremB >= 0) {
+                                System.out.println("Digite um valor menor que 0 e até -300!");
+                                continue;
+                            }
+                            posicaoTremB += velocidadeTremB;
+                            System.out.println("KM atual DO trem B " + posicaoTremB);
+                            break;
+
+                        } catch (InputMismatchException e) {
+                            System.out.println("Você digitou um caractere Inválido!");
+                        }
+                    }
+                    break;
+
+                    // fazer conferência se encostou ou não
+
+                }
+
+                if (opt == 2) {
                     System.out.println("FIM DO PROGRAMA!");
                     break;
 
@@ -63,8 +100,7 @@ public class Main {
                     System.out.println("Valor Inválido!\n");
 
                 }
-            }
-            catch (NumberFormatException e) {
+            } catch (NumberFormatException e) {
                 System.out.println("\nValor Inválido!\n");
 
             }

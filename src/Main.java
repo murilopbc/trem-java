@@ -42,22 +42,30 @@ public class Main {
                                     if (velocidadeTremA > 300 || velocidadeTremA < 0 || velocidadeTremB < -300 || velocidadeTremB > 0) {
                                         System.out.println("\nDigite um valor entre 0 a 300, sendo que a velocidade do trem B deve ser negativo!");
                                     }
-                                    if (velocidadeTremA == 0 && velocidadeTremB == 0 ){
+                                    if (velocidadeTremA == 0 && velocidadeTremB == 0) {
                                         System.out.println("\nOs trens não colidiram!");
                                     }
 
                                     // Lógica colisão
 
+                                    double t = (posicaoTremA - posicaoTremB) / (velocidadeTremB - velocidadeTremA);
+                                    double segundos = t * 3600;
+                                    double km = posicaoTremA + (velocidadeTremA * t);
+
+                                    System.out.printf("\nA colisão de trens acontecerá no KM %.0f e ocorrerá após %.0f segundos", km, segundos);
+                                    break;
+
                                 } catch (InputMismatchException e) {
                                     System.out.println("\nVocê digitou um caractere inválido!");
                                     sc.next();
-
                                 }
                             }
-                        } catch (NumberFormatException e) {
+                        } catch (InputMismatchException e) {
                             System.out.println("Valor Inválido!");
-                            sc.next();
+
                         }
+                        sc.nextLine();
+                        break;
                     }
 
                 }
@@ -66,10 +74,10 @@ public class Main {
                     break;
 
                 } else {
-                    System.out.println("Digite 1 ou 2!\n");
+                    System.out.println("\nDigite 1 ou 2!\n");
                 }
             } catch (NumberFormatException e) {
-                System.out.println("\nValor Inválido\n");
+                System.out.println("\nValor Inválido!\n");
 
             }
 

@@ -53,6 +53,7 @@ public class Main {
                                     double km = posicaoTremA + (velocidadeTremA * t);
 
                                     System.out.printf("\nA colisão de trens acontecerá no KM %.0f e ocorrerá após %.0f segundos", km, segundos);
+                                    sc.next();
                                     break;
 
                                 } catch (InputMismatchException e) {

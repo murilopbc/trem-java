@@ -53,8 +53,26 @@ public class Main {
                                     double km = posicaoTremA + (velocidadeTremA * t);
 
                                     System.out.printf("\nA colisão de trens acontecerá no KM %.0f e ocorrerá após %.0f segundos", km, segundos);
-                                    sc.next();
-                                    break;
+                                    while (true){
+                                        try {
+                                            System.out.println("\nDeseja jogar novamente?\n1-Sim\n2-Não");
+                                            int jogarNovamente = Integer.parseInt(sc.nextLine());
+                                            if (jogarNovamente != 1 && jogarNovamente != 2){
+
+                                            }
+                                            if (jogarNovamente == 2){
+                                                System.exit(0);
+                                            }
+                                            if (jogarNovamente == 1){
+                                                System.out.println("Voltar Início");
+                                            }
+                                        }catch (InputMismatchException e){
+                                            System.err.println("Insira um valor numérico!");
+                                        }
+                                        sc.next();
+                                        break;
+                                    }
+
 
 
                                 } catch (InputMismatchException e) {

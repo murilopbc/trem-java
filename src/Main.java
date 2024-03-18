@@ -61,6 +61,7 @@ public class Main {
 
                     } catch (InputMismatchException e) {
                         System.err.println("\nValor Inválido");
+                        sc.next();
                     }
                 }
                 while (true) {
@@ -76,6 +77,7 @@ public class Main {
 
                     } catch (InputMismatchException e) {
                         System.out.println("\nValor Inválido");
+                        sc.next();
                     }
                 }
                 while (true) {
@@ -104,20 +106,23 @@ public class Main {
 
                 while (true) {
                     try {
+
                         System.out.println("\nDeseja jogar novamente?\n1-Sim\n2-Não");
                         escolha = Integer.parseInt(sc.nextLine());
 
-                        if (escolha != 1 && escolha != 2) {
+                        if (escolha <= 0 || escolha > 2) {
                             System.err.println("\nDigite 1 ou 2!");
                             continue;
                         }
                         break;
 
-                    } catch (InputMismatchException e) {
+                    } catch (NumberFormatException e) {
                         sc.next();
                         System.err.println("\nValor Inválido!\n");
+
                     }
                 }
+
                 while (true){
                     if (escolha == 1){
                         break;

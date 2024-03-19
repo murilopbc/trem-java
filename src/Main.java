@@ -9,7 +9,7 @@ public class Main {
         Scanner sc = new Scanner(System.in);
 
         double posicaoInicial = 0, posicaoFinal = 10000, posicaoTremA, posicaoTremB, velocidadeTremA, velocidadeTremB;
-        int opt, escolha;
+        int opt;
 
         while (true) {
             try {
@@ -76,7 +76,7 @@ public class Main {
                         break;
 
                     } catch (InputMismatchException e) {
-                        System.out.println("\nValor Inválido");
+                        System.err.println("\nValor Inválido");
                         sc.next();
                     }
                 }
@@ -92,9 +92,13 @@ public class Main {
                         break;
 
                     } catch (InputMismatchException e) {
-                        System.out.println("\nValor Inválido");
+                        System.err.println("\nValor Inválido");
                         sc.next();
                     }
+                }
+                if (posicaoTremB < posicaoTremA || velocidadeTremA == 0 && velocidadeTremB == 0){
+                    System.out.println("Os trens não colidiram!");
+                    break;
                 }
 
                 double t = (posicaoTremA - posicaoTremB) / (velocidadeTremB - velocidadeTremA);
@@ -103,36 +107,9 @@ public class Main {
 
                 System.out.printf("\nA colisão de trens acontecerá no KM %.0f e ocorrerá após %.0f segundos", km, segundos);
 
-
-                while (true) {
-                    try {
-
-                        System.out.println("\nDeseja jogar novamente?\n1-Sim\n2-Não");
-                        escolha = Integer.parseInt(sc.nextLine());
-
-                        if (escolha <= 0 || escolha > 2) {
-                            System.err.println("\nDigite 1 ou 2!");
-                            continue;
-                        }
-                        break;
-
-                    } catch (NumberFormatException e) {
-                        sc.next();
-                        System.err.println("\nValor Inválido!\n");
-
-                    }
-                }
-
-                while (true){
-                    if (escolha == 1){
-                        break;
-                    }
-                    System.out.println("FIM DO PROGRAMA!");
-                    return;
-                }
             }
-            System.out.println("FIM DO PROGRAMA!");
-            break;
+            System.out.println("\nFIM DO PROGRAMA!");
+            return;
         }
     }
 }

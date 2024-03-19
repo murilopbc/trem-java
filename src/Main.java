@@ -96,11 +96,24 @@ public class Main {
 
                 }
 
+                int hora = 17;
+                double tempo = 0.0, horas, minuto, segundo;
+                String horario;
+
                 double t = (double) (posicaoTremA - posicaoTremB) / (velocidadeTremB - velocidadeTremA);
                 double segundos = t * 3600;
                 double km = posicaoTremA + (velocidadeTremA * t);
 
-                System.out.printf("\nA colisão de trens acontecerá no KM %.0f e ocorrerá após %.0f segundos\n", km, segundos);
+                horas = t + hora;
+                minuto = (tempo/60)%60;
+                segundo = tempo % 60;
+
+
+                // Formatando a hora
+                horario = String.format("%02.0f:%02.0f:%02.0f", horas, minuto, segundo);
+
+
+                System.out.printf("\nA colisão de trens acontecerá no KM %.0f e ocorrerá após %.0f segundos no horário %s\n", km, segundos, horario);
 
                 while (true) {
                     try {

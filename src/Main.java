@@ -1,4 +1,3 @@
-import java.util.InputMismatchException;
 import java.util.Locale;
 import java.util.Scanner;
 
@@ -8,8 +7,8 @@ public class Main {
         Locale.setDefault(Locale.US);
         Scanner sc = new Scanner(System.in);
 
-        double posicaoInicial = 0, posicaoFinal = 10000, posicaoTremA, posicaoTremB, velocidadeTremA, velocidadeTremB;
-        int opt;
+        double posicaoInicial = 0, posicaoFinal = 10000;
+        int opt, escolha, velocidadeTremB, velocidadeTremA, posicaoTremA, posicaoTremB;
 
         while (true) {
             try {
@@ -27,47 +26,43 @@ public class Main {
 
             }
         }
-        while (true) {
-            if (opt == 1) {
+
+        if (opt == 1) {
+            while (true) {
                 while (true) {
                     try {
                         System.out.println("\nDigite a posição inicial do trem A: ");
-                        posicaoTremA = sc.nextDouble();
+                        posicaoTremA = Integer.parseInt(sc.nextLine());
 
                         if (posicaoTremA < posicaoInicial || posicaoTremA > posicaoFinal) {
                             System.err.println("\nDigite uma posição entre 0 e 10.000!");
                             continue;
                         }
                         break;
-
-                    }
-                    catch (InputMismatchException e) {
+                    } catch (NumberFormatException e) {
                         System.err.println("\nValor Inválido");
-                        sc.next();
                     }
-
                 }
 
                 while (true) {
                     try {
                         System.out.println("\nDigite a posição inicial do trem B: ");
-                        posicaoTremB = sc.nextDouble();
+                        posicaoTremB = Integer.parseInt(sc.nextLine());
 
-                        if (posicaoTremB < posicaoInicial || posicaoTremB > posicaoFinal) {
+                        if (posicaoTremB < posicaoInicial || posicaoTremB > posicaoFinal || posicaoTremA == posicaoTremB) {
                             System.err.println("\nDigite uma posição entre 0 e 10.000!");
                             continue;
                         }
                         break;
 
-                    } catch (InputMismatchException e) {
+                    } catch (NumberFormatException e) {
                         System.err.println("\nValor Inválido");
-                        sc.next();
                     }
                 }
                 while (true) {
                     try {
                         System.out.println("\nDigite a velocidade do trem A: ");
-                        velocidadeTremA = sc.nextDouble();
+                        velocidadeTremA = Integer.parseInt(sc.nextLine());
 
                         if (velocidadeTremA > 300 || velocidadeTremA < 0) {
                             System.err.println("\nDigite um valor entre 0 a 300");
@@ -75,15 +70,14 @@ public class Main {
                         }
                         break;
 
-                    } catch (InputMismatchException e) {
+                    } catch (NumberFormatException e) {
                         System.err.println("\nValor Inválido");
-                        sc.next();
                     }
                 }
                 while (true) {
                     try {
                         System.out.println("\nDigite a velocidade do trem B: ");
-                        velocidadeTremB = sc.nextDouble();
+                        velocidadeTremB = Integer.parseInt(sc.nextLine());
 
                         if (velocidadeTremB > 0 || velocidadeTremB < -300) {
                             System.err.println("\nDigite um valor entre 0 a -300");
@@ -91,25 +85,43 @@ public class Main {
                         }
                         break;
 
-                    } catch (InputMismatchException e) {
+                    } catch (NumberFormatException e) {
                         System.err.println("\nValor Inválido");
-                        sc.next();
                     }
                 }
-                if (posicaoTremB < posicaoTremA || velocidadeTremA == 0 && velocidadeTremB == 0){
-                    System.out.println("Os trens não colidiram!");
-                    break;
+
+                if (posicaoTremB < posicaoTremA || velocidadeTremA == 0 && velocidadeTremB == 0) {
+                    System.out.println("\nOs trens não colidiram!");
+                    continue;
+
                 }
 
-                double t = (posicaoTremA - posicaoTremB) / (velocidadeTremB - velocidadeTremA);
+                double t = (double) (posicaoTremA - posicaoTremB) / (velocidadeTremB - velocidadeTremA);
                 double segundos = t * 3600;
                 double km = posicaoTremA + (velocidadeTremA * t);
 
-                System.out.printf("\nA colisão de trens acontecerá no KM %.0f e ocorrerá após %.0f segundos", km, segundos);
+                System.out.printf("\nA colisão de trens acontecerá no KM %.0f e ocorrerá após %.0f segundos\n", km, segundos);
 
+                while (true) {
+                    try {
+                        System.out.println("\nDeseja jogar novamente?\n1-Sim\n2-Não");
+                        escolha = Integer.parseInt(sc.nextLine());
+
+                        if (escolha <= 0 || escolha > 2) {
+                            System.err.println("\nDigite 1 ou 2!");
+                            continue;
+                        }
+                        break;
+
+                    } catch (NumberFormatException e) {
+                        System.err.println("\nValor Inválido!");
+                    }
+                }
+                if (escolha == 2) {
+                    System.out.println("\nFIM DO PROGRAMA!");
+                    return;
+                }
             }
-            System.out.println("\nFIM DO PROGRAMA!");
-            return;
         }
     }
 }
